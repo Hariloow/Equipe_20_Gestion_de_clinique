@@ -1,58 +1,58 @@
 package org.example;
 
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class ClinicTest {
     @Test
-    void laFileEstInitialementVide() {
-        Clinic clinic = new Clinic();
-        assertTrue(clinic.estVide());
-    }
-
-    @Test
-    void quandAjouterPatientAvecMigraine() {
-        Clinic clinic = new Clinic();
+    public void quandAjouterPatientAvecMigraine() {
+        Clinic clinic = new Clinic(TriageType.FIFO, TriageType.FIFO);
 
         Patient patient = new Patient("David", 0, VisibleSymptom.MIGRAINE);
         clinic.triagePatient(patient.getName(), patient.getGravite(), patient.getSymptom());
 
-        Patient p = clinic.getPatientMedecin("David");
-        assertTrue(p.equals(patient));
+        assertEquals(clinic.getPatientMedecin(), patient);
 
-        Patient p2 = clinic.getPatientRadio("David");
-        assertNull(p2);
+        assertTrue(clinic.radioEstVide());
     }
 
     @Test
-    void quandAjouter2Patients_AvecFluFileNonVide() {
-        Clinic clinic = new Clinic();
+    public void quandAjouter2Patients_AvecOneFluFileNonVide() {
+        Clinic clinic = new Clinic(TriageType.FIFO, TriageType.FIFO);
 
+        Patient patientJohn = new Patient("John", 0, VisibleSymptom.MIGRAINE);
         Patient patientDoe = new Patient("Doe", 0, VisibleSymptom.FLU);
 
-        clinic.triagePatient("John", 0, VisibleSymptom.MIGRAINE);
+        clinic.triagePatient(patientJohn.getName(), patientJohn.getGravite(), patientJohn.getSymptom());
         clinic.triagePatient(patientDoe.getName(), patientDoe.getGravite(), patientDoe.getSymptom());
 
-        Patient p = clinic.getPatientMedecin(1);
-        assertTrue(p.equals(patientDoe));
+        assertEquals(clinic.getPatientMedecin(), patientJohn);
+        assertEquals(clinic.getPatientMedecin(), patientDoe);
 
-        Patient p2 = clinic.getPatientRadio("Doe");
-        assertNull(p2);
+        assertTrue(clinic.radioEstVide());
     }
 
     @Test
-    void quandAjouterPatient_AvecEntorse() {
-        Clinic clinic = new Clinic();
+    public void quandAjouterPatient_AvecEntorse() {
+        Clinic clinic = new Clinic(TriageType.FIFO, TriageType.FIFO);
 
         Patient patient = new Patient("David", 0, VisibleSymptom.SPRAIN);
         clinic.triagePatient(patient.getName(), patient.getGravite(), patient.getSymptom());
 
-        Patient p = clinic.getPatientMedecin("David");
-        assertTrue(p.equals(patient));
+        assertEquals(clinic.getPatientMedecin(), patient);
 
-        Patient p2 = clinic.getPatientRadio("David");
-        assertTrue(p2.equals(patient));
+        assertEquals(clinic.getPatientRadio(), patient);
+    }
+
+    @Test
+    public void quandAjouterPatient_AvecFLU7() {
+        Clinic clinic = new Clinic(TriageType.FIFO, TriageType.FIFO);
+
+        Patient patient = new Patient("David", 0, VisibleSymptom.SPRAIN);
+        clinic.triagePatient(patient.getName(), patient.getGravite(), patient.getSymptom());
+
+        assertEquals(clinic.getPatientMedecin(), patient);
+
+        assertEquals(clinic.getPatientRadio(), patient);
     }
 }
