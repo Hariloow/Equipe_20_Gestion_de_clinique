@@ -55,4 +55,17 @@ public class ClinicTest {
 
         assertEquals(clinic.getPatientRadio(), patient);
     }
+
+    @Test
+    public void ajouterPatientMedecinGravityPasVide_avecFLU7_trier(){
+        Clinic clinic = new Clinic(TriageType.GRAVITY, TriageType.FIFO);
+
+        Patient patientJohn = new Patient("John",4 , VisibleSymptom.MIGRAINE);
+        Patient patientDoe = new Patient("Doe", 7, VisibleSymptom.FLU);
+
+        clinic.triagePatient(patientJohn.getName(), patientJohn.getGravite(), patientJohn.getSymptom());
+        clinic.triagePatient(patientDoe.getName(), patientDoe.getGravite(), patientDoe.getSymptom());
+
+        assertEquals(clinic.getPatientMedecin(), patientDoe);
+    }
 }
