@@ -11,9 +11,15 @@ public class Patient {
         visibleSymptom = VisibleSymptom.MIGRAINE;
     }
 
-    public Patient(String name, Integer gravite, VisibleSymptom symptom) {
+    public Patient(String name, Integer gravity){
         this.name = name;
-        this.gravite = gravite;
+        this.gravite = gravity;
+        this.visibleSymptom = VisibleSymptom.UNKNOW;
+    }
+
+    public Patient(String name, Integer gravity, VisibleSymptom symptom) {
+        this.name = name;
+        this.gravite = gravity;
         this.visibleSymptom = symptom;
     }
 
@@ -21,7 +27,7 @@ public class Patient {
         return this.name;
     }
 
-    public Integer getGravite() {
+    public Integer getGravity() {
         return gravite;
     }
 
@@ -33,7 +39,7 @@ public class Patient {
     public boolean equals(Object obj) {
         if (obj instanceof Patient) {
             Patient p = (Patient)obj;
-            return p.getName().equals(getName()) && p.getGravite() == getGravite() 
+            return p.getName().equals(getName()) && p.getGravity() == getGravity()
             && p.getSymptom() == getSymptom(); 
         }
 

@@ -1,7 +1,5 @@
 package org.example;
 
-import java.util.LinkedList;
-
 public class Clinic {
     private final WaitingQueue fileMedecin;
     private final WaitingQueue fileRadio;
@@ -45,11 +43,11 @@ public class Clinic {
     }
 
     public void addPatientList(WaitingQueue queue, Patient patient){
-        if (queue.getTypeTriage() == TriageType.FIFO || patient.getGravite() <= 5)
+        if (queue.getTypeTriage() == TriageType.FIFO || patient.getGravity() <= 5)
             queue.getFile().addLast(patient);
         else if (queue.getTypeTriage() == TriageType.GRAVITY) {
             int index = 0;
-            while (index < queue.getFile().size() && queue.getFile().get(index).getGravite() >= patient.getGravite())
+            while (index < queue.getFile().size() && patient.getGravity() >= 5 && queue.getFile().get(index).getGravity() >= patient.getGravity())
                 index++;
 
             queue.getFile().add(index, patient);

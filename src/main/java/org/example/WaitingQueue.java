@@ -3,8 +3,8 @@ package org.example;
 import java.util.LinkedList;
 
 public class WaitingQueue {
-    private TriageType typeTriage;
-    private LinkedList<Patient> file;
+    private final TriageType typeTriage;
+    private final LinkedList<Patient> file;
 
     WaitingQueue(TriageType typeTriage){
         this.typeTriage = typeTriage;
