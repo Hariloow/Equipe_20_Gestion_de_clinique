@@ -11,12 +11,6 @@ public class Patient {
         visibleSymptom = VisibleSymptom.MIGRAINE;
     }
 
-    public Patient(String name, Integer gravity){
-        this.name = name;
-        this.gravite = gravity;
-        this.visibleSymptom = VisibleSymptom.UNKNOW;
-    }
-
     public Patient(String name, Integer gravity, VisibleSymptom symptom) {
         this.name = name;
         this.gravite = gravity;

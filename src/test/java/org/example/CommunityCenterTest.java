@@ -31,4 +31,15 @@ public class CommunityCenterTest {
 
         assertEquals(communityCenter.getPatient(), patientDoe);
     }
+
+    @Test
+    public void ajouterPatient_avecCovid_renvoyerChezLui(){
+        CommunityCenter communityCenter = new CommunityCenter(TriageType.GRAVITY);
+
+        Patient patientJohn = new Patient("John",1000000 , VisibleSymptom.CORONAVIRUS);
+
+        communityCenter.triagePatient(patientJohn);
+
+        assertFalse(communityCenter.isPatientCovidInQueue());
+    }
 }

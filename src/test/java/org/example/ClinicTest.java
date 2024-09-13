@@ -95,4 +95,15 @@ public class ClinicTest {
 
         assertEquals(clinic.getPatientRadio(), patientDoe);
     }
+
+    @Test
+    public void ajouterPatient_avecCovid_renvoyerChezLui(){
+        Clinic clinic = new Clinic(TriageType.GRAVITY, TriageType.GRAVITY);
+
+        Patient patientJohn = new Patient("John",1000000 , VisibleSymptom.CORONAVIRUS);
+
+        clinic.triagePatient(patientJohn.getName(), patientJohn.getGravity(), patientJohn.getSymptom());
+
+        assertFalse(clinic.isPatientCovidInMedecinList());
+    }
 }

@@ -10,6 +10,9 @@ public class Clinic {
     }
 
     public void triagePatient(String name, int gravity, VisibleSymptom visibleSymptom) {
+        if(visibleSymptom == VisibleSymptom.CORONAVIRUS)
+            return;
+
         Patient patient = new Patient(name, gravity, visibleSymptom);
 
         addPatientList(fileMedecin, patient);
@@ -52,5 +55,17 @@ public class Clinic {
 
             queue.getFile().add(index, patient);
         }
+    }
+
+    public Boolean isPatientCovidInMedecinList() {
+        int index = 0;
+
+        while (index < fileMedecin.getFile().size()) {
+            if (fileMedecin.getFile().get(index).getSymptom() == VisibleSymptom.CORONAVIRUS)
+                return true;
+            index++;
+        }
+
+        return false;
     }
 }
